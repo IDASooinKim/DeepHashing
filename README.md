@@ -4,17 +4,12 @@
 
 This is a PyTorch implementation of a deep hashing algorithm integrated with a __mini-batch-based graph construction__ module. The provided experiments and dataset use [Stanford Cars](https://ai.stanford.edu/~jkrause/cars/car_dataset.html). Please follow the instructions below to set up the experimental environment.
 
-<font size="4">
-PeerJ 2025
-</font>
-<br>
-
 ![poster](./images/key_modules.png)
-<\div>
+<div align="left">
 
 ## Abstract
 
-_To improve visual information retrieval systems such as image search, deep hashing techniques are used to generate compact representations of high-dimensional data. 
+To improve visual information retrieval systems such as image search, deep hashing techniques are used to generate compact representations of high-dimensional data. 
 While convolutional neural networks (CNNs) have been the predominant approach for learning hash codes, their Euclidean space-based representations struggle to capture complex data structures effectively.
 Conventional CNN-based hashing methods constrain data relationships to regular grid structures, which limits their ability to capture the complex structural information inherent in unstructured data or high-dimensional manifolds. 
 Although GCN-based hashing approaches have been introduced to address these limitations, most rely on static graph structures, making it difficult to reflect the diversity of local data distributions.
