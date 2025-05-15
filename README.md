@@ -20,3 +20,33 @@ Experiments conduct on the STL-10, Stanford Cars, and Tiny ImageNet datasets dem
 In particular, the application of diverse spectral filters quantitatively reveals differences in graph representation capacity.
 This work empirically demonstrates that spectral-domain filtering operations contribute to preserving structural information and enhancing representation power in graph-based deep hashing. 
 Moreover, it highlights the effectiveness of combining dynamic graph construction with transfer learning for representing high-dimensional image data.*
+
+## Installation
+
+To train the model, you need to set up the experimental environment. Use a virtual environment such as Anaconda to install the packages listed in the provided requirements.txt file. While various versions of Python modules may be used, the versions specified in the text file reflect the environment used in the experiments.
+
+### 1. Clone the repository
+
+'''shell
+# SSH
+git clone git@
+'''
+
+### 2. Creating conda envs
+
+'''shell
+
+# SSH
+conda create -n deephashing python=3.8
+conda activate deephashing
+'''
+
+### 3. Install requirements 
+
+'''shell
+pip install -r requirements.txt
+'''
+
+## Training Data preparation
+
+
