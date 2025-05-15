@@ -71,3 +71,32 @@ python main.py --num_epochs 200 --batch_size 64 --num_cls 10
 ```
 
 For detailed arguments, please refer to the arguments.py file.
+
+## Evaluation
+
+The model's mAP results are printed to the CLI and saved as a .csv file in the "logs" folder of the project directory after each experiment is completed.
+The mAP comparison table presented in the paper is as follows.
+
+### STL-10
+| Model   | 16-bit | 28-bit | 32-bit | 64-bit | 128-bit |
+| ------- | ------ | ------ | ------ | ------ | ------- |
+| Poly    | 0.645  | 0.801  | 0.873  | 0.882  | 0.881   |
+| Lanczos | 0.860  | 0.870  | 0.873  | 0.878  | 0.882   |
+| Cheby   | 0.861  | 0.870  | 0.872  | 0.872  | 0.881   |
+| GCN     | 0.861  | 0.869  | 0.872  | 0.882  | 0.883   |
+
+### Stanford Cars
+| Model   | 16-bit | 28-bit | 32-bit | 64-bit | 128-bit |
+| ------- | ------ | ------ | ------ | ------ | ------- |
+| Poly    | 0.835  | 0.851  | 0.913  | 0.932  | 0.933   |
+| Lanczos | 0.900  | 0.918  | 0.918  | 0.927  | 0.934   |
+| Cheby   | 0.903  | 0.920  | 0.919  | 0.927  | 0.936   |
+| GCN     | 0.911  | 0.918  | 0.920  | 0.932  | 0.952   |
+
+### Tiny ImageNet
+| Model   | 16-bit | 28-bit | 32-bit | 64-bit | 128-bit |
+| ------- | ------ | ------ | ------ | ------ | ------- |
+| Poly    | 0.897  | 0.910  | 0.945  | 0.968  | 0.979   |
+| Lanczos | 0.914  | 0.935  | 0.959  | 0.971  | 0.982   |
+| Cheby   | 0.929  | 0.938  | 0.955  | 0.970  | 0.983   |
+| GCN     | 0.934  | 0.940  | 0.967  | 0.975  | 0.989   |
