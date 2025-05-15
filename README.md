@@ -56,7 +56,18 @@ Each folder in the downloaded dataset represents a class, and each folder contai
 project/
 ├── data/
 │   ├── 0
-|   |─────── 0.npy
-|   |─────── 1.npy
+|   |───── 0.npy
+|   |───── 1.npy
 │   └── 1
 ```
+
+## Model Train
+
+Model training can be easily run using the command __python main.py__.
+If you wish to adjust the batch size, number of epochs, or other parameters, please use the following command:
+
+```{shell}
+python main.py --num_epochs 200 --batch_size 64 --num_cls 10 
+```
+
+For detailed arguments, please refer to the arguments.py file.
