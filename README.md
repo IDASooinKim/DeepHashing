@@ -50,3 +50,13 @@ Please download the image dataset for the experiment.
 The downloaded images must be embedded into 1-dimensional vectors of size 784 using the [ViT B/16](https://docs.pytorch.org/vision/main/models/generated/torchvision.models.vit_b_16.html) model. 
 For faster experimentation, you can download the pre-embedded [Stanford_Cars dataset](https://drive.google.com/file/d/1s39IUmYMnvvwMu1eotckh3HF6Mr1QvUt/view?usp=drive_link).
 
+Each folder in the downloaded dataset represents a class, and each folder contains approximately 50 embeddings of the same class. If you wish to train with custom data, please follow the folder directory structure below.
+
+```
+project/
+├── data/
+│   ├── 0
+|   |─────── 0.npy
+|   |─────── 1.npy
+│   └── 1
+```
