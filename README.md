@@ -8,11 +8,10 @@ This is a PyTorch implementation of a deep hashing algorithm integrated with a _
 <div align="left">
 
 ## Abstract
-To improve visual information retrieval systems such as image search, deep hashing techniques are used to generate compact representations of high-dimensional data. 
+_To improve visual information retrieval systems such as image search, deep hashing techniques are used to generate compact representations of high-dimensional data. 
 While convolutional neural networks (CNNs) have been the predominant approach for learning hash codes, their Euclidean space-based representations struggle to capture complex data structures effectively.
 Conventional CNN-based hashing methods constrain data relationships to regular grid structures, which limits their ability to capture the complex structural information inherent in unstructured data or high-dimensional manifolds. 
 Although GCN-based hashing approaches have been introduced to address these limitations, most rely on static graph structures, making it difficult to reflect the diversity of local data distributions.
-% Approach.
 We propose a graph convolutional autoencoder that combines transfer learning-based visual embeddings with a range of spectral filtering strategies. 
 For each input batch, the model dynamically constructs local subgraphs and exploits the eigenvectors of the graph Laplacian to extract both global and local structural features from the graph signals. 
 Through this process, the graph convolutional layers can effectively model the local topology of unstructured data while simultaneously improving learning efficiency and representation capacity through parameter sharing and transfer learning.
