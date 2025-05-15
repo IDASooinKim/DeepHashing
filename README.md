@@ -28,15 +28,12 @@ To train the model, you need to set up the experimental environment. Use a virtu
 ### 1. Clone the repository
 
 '''{shell}
-# SSH
 git clone git@
 '''
 
 ### 2. Creating conda envs
 
 '''{shell}
-
-# SSH
 conda create -n deephashing python=3.8
 conda activate deephashing
 '''
