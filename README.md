@@ -28,7 +28,7 @@ To train the model, you need to set up the experimental environment. Use a virtu
 ### 1. Clone the repository
 
 ```{shell}
-git clone git@
+git clone https://github.com/IDASooinKim/DeepHashing.git
 ```
 
 ### 2. Creating conda envs
