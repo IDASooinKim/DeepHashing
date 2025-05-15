@@ -76,19 +76,15 @@ class Machine(nn.Module):
         else:
             raise KeyError
 
-    def adj_generator(self, B, device):
+    def adj_generator(self, A, device):
 
-        # Compute pairwise cosine similarity
-        B = torch.where(B>torch.mean(B),1,0).float()
-        B_m = B-1
-        A = 1 + (torch.matmul(B, B_m.T) + torch.matmul(B_m, B.T))/B.shape[1]
-        A = torch.where(A>torch.mean(A),1,0).float()
-        
+        A = 1 + A
+
         # diagnoal process
         D = torch.sum(A, dim=1)
         D = torch.diag(D)
         D = torch.diag(torch.diag(D).pow(-0.5))
-        
+
         return A, D
 
     def fourier(self, L, k=1):
@@ -185,6 +181,7 @@ class Machine(nn.Module):
         return T, torch.stack(V, dim=1)[:, :-1]
 
     def calc_sim(self, x):
+
         similarity_matrix = torch.matmul(x, x.T)/x.shape[0]
         return similarity_matrix
 
