@@ -9,17 +9,14 @@ This is a PyTorch implementation of a deep hashing algorithm integrated with a _
 
 ## Abstract
 
-*To improve visual information retrieval systems such as image search, deep hashing techniques are used to generate compact representations of high-dimensional data. 
-While convolutional neural networks (CNNs) have been the predominant approach for learning hash codes, their Euclidean space-based representations struggle to capture complex data structures effectively.
-Conventional CNN-based hashing methods constrain data relationships to regular grid structures, which limits their ability to capture the complex structural information inherent in unstructured data or high-dimensional manifolds. 
-Although GCN-based hashing approaches have been introduced to address these limitations, most rely on static graph structures, making it difficult to reflect the diversity of local data distributions.
-We propose a graph convolutional autoencoder that combines transfer learning-based visual embeddings with a range of spectral filtering strategies. 
-For each input batch, the model dynamically constructs local subgraphs and exploits the eigenvectors of the graph Laplacian to extract both global and local structural features from the graph signals. 
-Through this process, the graph convolutional layers can effectively model the local topology of unstructured data while simultaneously improving learning efficiency and representation capacity through parameter sharing and transfer learning.
-Experiments conduct on the STL-10, Stanford Cars, and Tiny ImageNet datasets demonstrate that the proposed model achieves competitive performance not only against traditional CNN-based hashing methods but also against GCN-based methods using static graphs. 
-In particular, the application of diverse spectral filters quantitatively reveals differences in graph representation capacity.
-This work empirically demonstrates that spectral-domain filtering operations contribute to preserving structural information and enhancing representation power in graph-based deep hashing. 
-Moreover, it highlights the effectiveness of combining dynamic graph construction with transfer learning for representing high-dimensional image data.*
+*Deephashing has emerged as an efficient and robust solution for image retrieval through representation learning. 
+However, CNN-based hashing methods are constrained by their reliance on grid structures, limiting their capacity to model complex or unstructured data relationships. 
+This paper proposes a novel deephashing model that integrates transfer learning–based visual embeddings, obtained via an autoencoder, with graph convolutional networks (GCNs). 
+The model dynamically constructs local subgraphs from the output of a transfer model, enabling the learning of both global and local structural relationships through the graph Laplacian. 
+A GCN layer is employed to effectively capture local topologies in unstructured data, enhancing both representation quality and learning efficiency through parameter sharing and transfer learning. 
+Experiments conducted on the evaluation datasets demonstrate that the proposed method outperforms existing CNN-based and GCN-based deephashing approaches. 
+Furthermore, the analysis of various GCN filters under the proposed framework offers valuable insights into filter selection for deephashing. 
+Ultimately, GCN filters contribute to structural preservation and improved expressiveness, while the combination of dynamic graph construction and transfer learning facilitates the generation of compact, robust hash codes from high-dimensional image data.*
 
 ## Installation
 
