@@ -2,24 +2,15 @@
 
 # Enhancing deephashing with graph filters and autoencoder-based embeddings
 
-This is a PyTorch implementation of a deep hashing algorithm integrated with a __mini-batch-based graph construction__ module. The provided experiments and dataset use [Stanford Cars](https://ai.stanford.edu/~jkrause/cars/car_dataset.html). Please follow the instructions below to set up the experimental environment.
-
 ![poster](./images/arch.png)
 <div align="left">
 
-## Abstract
+## Description
 
-*Deephashing has emerged as an efficient and robust solution for image retrieval through representation learning. 
-However, CNN-based hashing methods are constrained by their reliance on grid structures, limiting their capacity to model complex or unstructured data relationships. 
-This paper proposes a novel deephashing model that integrates transfer learning–based visual embeddings, obtained via an autoencoder, with graph convolutional networks (GCNs). 
-The model dynamically constructs local subgraphs from the output of a transfer model, enabling the learning of both global and local structural relationships through the graph Laplacian. 
-A GCN layer is employed to effectively capture local topologies in unstructured data, enhancing both representation quality and learning efficiency through parameter sharing and transfer learning. 
-Experiments conducted on the evaluation datasets demonstrate that the proposed method outperforms existing CNN-based and GCN-based deephashing approaches. 
-Furthermore, the analysis of various GCN filters under the proposed framework offers valuable insights into filter selection for deephashing. 
-Ultimately, GCN filters contribute to structural preservation and improved expressiveness, while the combination of dynamic graph construction and transfer learning facilitates the generation of compact, robust hash codes from high-dimensional image data.*
+*This is a PyTorch implementation of a deep hashing algorithm integrated with a __mini-batch-based graph construction__ module. The provided experiments and dataset use [Stanford Cars](https://ai.stanford.edu/~jkrause/cars/car_dataset.html).*
 
 ## Installation
-
+Please follow the instructions below to set up the experimental environment.
 To train the model, you need to set up the experimental environment. Use a virtual environment such as Anaconda to install the packages listed in the provided requirements.txt file. While various versions of Python modules may be used, the versions specified in the text file reflect the environment used in the experiments.
 
 ### 1. Clone the repository
