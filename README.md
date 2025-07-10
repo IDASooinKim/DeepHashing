@@ -12,12 +12,14 @@ This code implements a basic image retrieval pipeline using the proposed self-su
 
 ## Dataset Information
 
-*HAGCN is tested using the benchmark datasets STL-10, Stanford Cars, and Tiny ImageNet. 
+HAGCN is tested using the benchmark datasets STL-10, Stanford Cars, and Tiny ImageNet. 
 The STL-10 dataset is a computer vision benchmark with 10 classes of images of size 96 × 96, which is widely used for tasks such as representation learning, deep hashing, and self-supervised learning.
 Each image has a resolution of 96×96. The Stanford Car dataset contains over 16,000 images across 196 classes, based on car manufacturer and model year. 
 The images are of varying resolutions, but most are high-resolution, typically around 300×300 to 600×600 pixels. All images were resized to 224×224. This dataset shows the visual differences in car model designs over time and is used to evaluate models for fine-grained recognition and transfer learning in computer vision. 
-The Tiny ImageNet dataset consists of 200 classes and 500 training images per class, and the ImageNet images are downsampled to 64×64. This dataset helps evaluate the scalability and robustness of the model for different object types.*
+The Tiny ImageNet dataset consists of 200 classes and 500 training images per class, and the ImageNet images are downsampled to 64×64. This dataset helps evaluate the scalability and robustness of the model for different object types.
 
+The downloaded images must be embedded into 1-dimensional vectors of size 784 using the [ViT B/16](https://docs.pytorch.org/vision/main/models/generated/torchvision.models.vit_b_16.html) model.
+For faster experimentation, Please download the pre-embedded image dataset for the experiment:  you can download the pre-embedded [Stanford_Cars dataset](https://drive.google.com/file/d/1s39IUmYMnvvwMu1eotckh3HF6Mr1QvUt/view?usp=drive_link).
 
 ## Usage Instructions & Requrements
 Please follow the instructions below to set up the experimental environment.
@@ -43,10 +45,6 @@ pip install -r requirements.txt
 ```
 
 ### 4. Training Data preparation
-
-Please download the image dataset for the experiment. 
-The downloaded images must be embedded into 1-dimensional vectors of size 784 using the [ViT B/16](https://docs.pytorch.org/vision/main/models/generated/torchvision.models.vit_b_16.html) model. 
-For faster experimentation, you can download the pre-embedded [Stanford_Cars dataset](https://drive.google.com/file/d/1s39IUmYMnvvwMu1eotckh3HF6Mr1QvUt/view?usp=drive_link).
 
 Each folder in the downloaded dataset represents a class, and each folder contains approximately 50 embeddings of the same class. If you wish to train with custom data, please follow the folder directory structure below.
 
