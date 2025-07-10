@@ -37,7 +37,7 @@ class Asig(nn.Module):
         return torch.sigmoid(alpha*x)
 ```
 
-```
+```python
 class class Machine(nn.Module):
     ''' '''
     def __init__(...)
