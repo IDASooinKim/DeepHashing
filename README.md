@@ -91,10 +91,61 @@ Provides relationship information for subsequent graph operations.
 Defines the full forward pass of the model, performing task-specific graph filtering.
 Outputs the hash code, similarity matrix, and feature representation.
 
-The following is a description of training steps for our experiments
-
 ### 2. engine.py
 
+The following is a description of training steps for our experiments
+
+```python
+def run_experiment(k, num_epochs, task, exp_hash_len, train_loader, test_loader, query_loader, device)"
+    ...
+    for hash_len in exp_hash_len:
+        for key in task:
+            ...
+            machine = Machine( ...)
+            criterion = nn.MSELoss()  # Mean Squared Error Loss
+            optimizer = optim.Adam(machine.parameters(), lr=0.0001)
+            ...
+            for idx, epoch in enumerate(range(num_epochs)):
+                ...
+            with torch.no_grad():
+                ...
+                for x_batch, y_batch in test_loader:
+                    ...
+                np.where(dataset_hcodes>=0.5, 1, 0)
+                ...
+                for x_batch, y_batch in query_loader:
+                ...
+                testset_hcodes = np.where(testset_hcodes>=0.5, 1, 0)
+            mAP = CalcTopMap(...)
+```
+
+1️⃣ Model and Experiment Setup
+The Machine model is initialized with different combinations of task and hash length.
+Defines the loss function (MSE) and optimizer (Adam).
+
+2️⃣ Training Loop
+Iterates over training data, calculating reconstruction loss and similarity-based hash loss.
+Performs backpropagation to update model parameters.
+
+3️⃣ Hash Code Binarization
+Converts sigmoid outputs into binary hash codes using a 0.5 threshold.
+The binary values are then scaled to {-1, 1} for evaluation.
+
+4️⃣ Test Set Hash Code Generation
+Generates hash codes for the gallery (database) using the test_loader.
+Appends each batch's hash codes and labels to lists, then concatenates them.
+
+5️⃣ Query Set Hash Code Generation
+Generates hash codes for the query set using the query_loader.
+Similarly binarizes and stores hash codes and labels as full arrays.
+
+6️⃣ Retrieval Performance Evaluation (mAP Calculation)
+Computes mAP using CalcTopMap() between query and gallery hash codes.
+Measures retrieval accuracy based on top-k Hamming distance.
+
+7️⃣ Result Logging and Output
+Tracks the best mAP and logs the results to a CSV file.
+Prints a summary of the experiment including task, k, and hash_len.
 
 
 ## Usage Instructions & Requrements
