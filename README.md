@@ -26,7 +26,46 @@ The downloaded images must be embedded into 1-dimensional vectors of size 784 us
 For faster experimentation, Please download the pre-embedded image dataset for the experiment:  you can download the pre-embedded [Stanford_Cars dataset](https://drive.google.com/file/d/1s39IUmYMnvvwMu1eotckh3HF6Mr1QvUt/view?usp=drive_link).
 
 ## Code Information
-### 1. Model.py
+
+This code loads .npy files organized in folders into a custom PyTorch Dataset and splits them into train, test, and query sets.
+It sets up a data loading pipeline for training and evaluating image retrieval or hashing models.
+
+### 1. data_loader.py
+```python
+class NpyFolderDataset(Dataset):
+    def __init__(self, ...)
+    ...
+    def __len__(self):
+    ...
+    def __getitem__(self):
+    ...
+```
+
+🗂️ NpyFolderDataset Class
+A custom PyTorch Dataset class for loading .npy files organized in a folder structure.
+It traverses class-specific directories, collecting file paths and corresponding labels.
+
+📏 __len__ Method
+Returns the total number of samples in the dataset.
+This corresponds to the length of the self.data list.
+
+📥 __getitem__ Method
+Loads the .npy file at the specified index, converts it into a float tensor, and returns it with its label.
+The sample tensor is squeezed to remove extra dimensions.
+
+```python
+def get_data_loader():
+    ...
+    train_test_split()
+    ...
+    DataLoader()
+```
+
+🔄 get_data_loader Function
+Randomly splits the dataset into training, test (database), and query sets.
+Returns PyTorch DataLoader objects for each split for efficient batching and loading.
+
+### 2. Model.py
 
 This source file contains the direct implementation of the HAGCN model.
 First, the sigmoid function used for binarizing the hash codes is defined as follows.
@@ -91,7 +130,7 @@ Provides relationship information for subsequent graph operations.
 Defines the full forward pass of the model, performing task-specific graph filtering.
 Outputs the hash code, similarity matrix, and feature representation.
 
-### 2. engine.py
+### 3. engine.py
 
 The following is a description of training steps for our experiments
 
@@ -146,7 +185,6 @@ Measures retrieval accuracy based on top-k Hamming distance.
 7️⃣ Result Logging and Output
 Tracks the best mAP and logs the results to a CSV file.
 Prints a summary of the experiment including task, k, and hash_len.
-
 
 ## Usage Instructions & Requrements
 Please follow the instructions below to set up the experimental environment.
