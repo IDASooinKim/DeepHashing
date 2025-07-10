@@ -37,6 +37,28 @@ class Asig(nn.Module):
         return torch.sigmoid(alpha*x)
 ```
 
+The following is a description of each function in the proposed HAGCN model.
+
+```python
+class Machine(nn.Module):
+        ...
+    def __init__(self)
+        ...
+    def adj_generator(self, A, device)
+        ...
+    def fourier(self, L, k=1)
+        ...
+    def bspline_basis(self, K, x, degree)
+        ...
+    def chebyshev_polynomials(self, L_hat, K)
+        ...
+    def lanczos_algorithm(self, A, k, v0=None)
+        ...
+    def calc_sim(self, x)
+        ...
+    def forward(self, x, alpha)
+```
+
 🔧 __init__
 Initializes the model structure and hyperparameters, setting different graph filtering weights depending on the task.
 Defines the necessary layers, activation functions, and normalization components.
@@ -68,26 +90,6 @@ Provides relationship information for subsequent graph operations.
 🚀 forward
 Defines the full forward pass of the model, performing task-specific graph filtering.
 Outputs the hash code, similarity matrix, and feature representation.
-
-```python
-class Machine(nn.Module):
-        ...
-    def __init__(self)
-        ...
-    def adj_generator(self, A, device)
-        ...
-    def fourier(self, L, k=1)
-        ...
-    def bspline_basis(self, K, x, degree)
-        ...
-    def chebyshev_polynomials(self, L_hat, K)
-        ...
-    def lanczos_algorithm(self, A, k, v0=None)
-        ...
-    def calc_sim(self, x)
-        ...
-    def forward(self, x, alpha)
-```
 
 
 ## Usage Instructions & Requrements
