@@ -37,6 +37,38 @@ class Asig(nn.Module):
         return torch.sigmoid(alpha*x)
 ```
 
+🔧 __init__
+Initializes the model structure and hyperparameters, setting different graph filtering weights depending on the task.
+Defines the necessary layers, activation functions, and normalization components.
+
+🔗 adj_generator
+Generates a normalized adjacency matrix and diagonal matrix from the input similarity matrix.
+Performs basic preprocessing for graph filtering.
+
+🎼 fourier
+Computes the eigenvalues and eigenvectors of the graph Laplacian matrix.
+Used in Fourier-based graph filtering.
+
+📐 bspline_basis
+Generates B-spline basis functions for use in spline filtering.
+Implements the recursive Cox-De Boor algorithm.
+
+🧮 chebyshev_polynomials
+Computes Chebyshev polynomials to create bases for filtering.
+Efficiently handles repeated linear operations on the graph.
+
+🧾 lanczos_algorithm
+Uses the Lanczos algorithm to approximate a symmetric matrix with a tridiagonal matrix and orthogonal basis.
+Provides the foundation for Lanczos-based filtering.
+
+📊 calc_sim
+Calculates pairwise similarity between feature vectors to produce a similarity matrix.
+Provides relationship information for subsequent graph operations.
+
+🚀 forward
+Defines the full forward pass of the model, performing task-specific graph filtering.
+Outputs the hash code, similarity matrix, and feature representation.
+
 ```python
 class Machine(nn.Module):
         ...
