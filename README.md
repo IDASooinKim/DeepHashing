@@ -91,6 +91,12 @@ Provides relationship information for subsequent graph operations.
 Defines the full forward pass of the model, performing task-specific graph filtering.
 Outputs the hash code, similarity matrix, and feature representation.
 
+The following is a description of training steps for our experiments
+
+### 2. engine.py
+
+
+
 ## Usage Instructions & Requrements
 Please follow the instructions below to set up the experimental environment.
 To train the model, you need to set up the experimental environment. Use a virtual environment such as Anaconda to install the packages listed in the provided requirements.txt file. While various versions of Python modules may be used, the versions specified in the text file reflect the environment used in the experiments.
