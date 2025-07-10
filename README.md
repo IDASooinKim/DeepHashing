@@ -26,9 +26,11 @@ The downloaded images must be embedded into 1-dimensional vectors of size 784 us
 For faster experimentation, Please download the pre-embedded image dataset for the experiment:  you can download the pre-embedded [Stanford_Cars dataset](https://drive.google.com/file/d/1s39IUmYMnvvwMu1eotckh3HF6Mr1QvUt/view?usp=drive_link).
 
 ## Code Information
-'''
-python
-'''
+```
+function test() {
+  console.log("notice the blank line before this function?");
+}
+```
 
 
 
