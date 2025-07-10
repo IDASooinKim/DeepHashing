@@ -26,10 +26,15 @@ The downloaded images must be embedded into 1-dimensional vectors of size 784 us
 For faster experimentation, Please download the pre-embedded image dataset for the experiment:  you can download the pre-embedded [Stanford_Cars dataset](https://drive.google.com/file/d/1s39IUmYMnvvwMu1eotckh3HF6Mr1QvUt/view?usp=drive_link).
 
 ## Code Information
-```
-function test() {
-  console.log("notice the blank line before this function?");
-}
+### 1. Model.py
+
+This source file contains the direct implementation of the HAGCN model.
+First, the sigmoid function used for binarizing the hash codes is defined as follows.
+
+```python 
+class Asig(nn.Module):
+    def forward(self, x, alpha):
+        return torch.sigmoid(alpha*x)
 ```
 
 
