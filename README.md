@@ -15,8 +15,11 @@ This code implements a basic image retrieval pipeline using the proposed self-su
 HAGCN is tested using the benchmark datasets [STL-10](https://cs.stanford.edu/~acoates/stl10/), [Stanford Cars](https://ai.stanford.edu/~jkrause/cars/car_dataset.html), and [Tiny ImageNet](https://www.kaggle.com/c/tiny-imagenet). 
 
 The STL-10 dataset is a computer vision benchmark with 10 classes of images of size 96 × 96, which is widely used for tasks such as representation learning, deep hashing, and self-supervised learning.
-Each image has a resolution of 96×96. The Stanford Car dataset contains over 16,000 images across 196 classes, based on car manufacturer and model year. 
+Each image has a resolution of 96×96. 
+
+The Stanford Car dataset contains over 16,000 images across 196 classes, based on car manufacturer and model year. 
 The images are of varying resolutions, but most are high-resolution, typically around 300×300 to 600×600 pixels. All images were resized to 224×224. This dataset shows the visual differences in car model designs over time and is used to evaluate models for fine-grained recognition and transfer learning in computer vision. 
+
 The Tiny ImageNet dataset consists of 200 classes and 500 training images per class, and the ImageNet images are downsampled to 64×64. This dataset helps evaluate the scalability and robustness of the model for different object types.
 
 The downloaded images must be embedded into 1-dimensional vectors of size 784 using the [ViT B/16](https://docs.pytorch.org/vision/main/models/generated/torchvision.models.vit_b_16.html) model.
