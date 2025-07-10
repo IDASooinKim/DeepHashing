@@ -38,7 +38,7 @@ class Asig(nn.Module):
 ```
 
 ```python
-class class Machine(nn.Module):
+class Machine(nn.Module):
         ...
     def __init__(self)
         ...
