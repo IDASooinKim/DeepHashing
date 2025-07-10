@@ -39,21 +39,21 @@ class Asig(nn.Module):
 
 ```python
 class class Machine(nn.Module):
-    ''' '''
+    ...
     def __init__(...)
-        ''' 
+        ...
     def adj_generator(self, A, device)
-        '''
+        ...
     def fourier(self, L, k=1)
-        '''
+        ...
     def bspline_basis(self, K, x, degree)
-        '''
+        ...
     def chebyshev_polynomials(self, L_hat, K)
-        '''
+        ...
     def lanczos_algorithm(self, A, k, v0=None)
-        '''
+        ...
     def calc_sim(self, x)
-        '''
+        ...
     def forward(self, x, alpha)
 ```
 
