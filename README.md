@@ -41,7 +41,7 @@ class NpyFolderDataset(Dataset):
     ...
 ```
 
-* NpyFolderDataset Class
+* `NpyFolderDataset` Class
   
 > A custom PyTorch Dataset class for loading .npy files organized in a folder structure.
 > It traverses class-specific directories, collecting file paths and corresponding labels.
