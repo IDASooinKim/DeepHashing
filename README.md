@@ -45,16 +45,12 @@ class NpyFolderDataset(Dataset):
   
 > A custom PyTorch Dataset class for loading .npy files organized in a folder structure.
 > It traverses class-specific directories, collecting file paths and corresponding labels.
-
-* `__len__` Method
-  
-> Returns the total number of samples in the dataset.
-> This corresponds to the length of the self.data list.
+> `__len__` method returns the total number of samples in the dataset.
 
 * `__getitem__` Method
   
 > Loads the .npy file at the specified index, converts it into a float tensor, and returns it with its label.
-> The sample tensor is squeezed to remove extra dimensions.
+> the sample tensor is squeezed to remove extra dimensions.
 
 ```python
 def get_data_loader():
@@ -66,8 +62,8 @@ def get_data_loader():
 
 * `get_data_loader` Function
   
-> Randomly splits the dataset into training, test (database), and query sets.
-> Returns PyTorch DataLoader objects for each split for efficient batching and loading.
+> Randomly splits the dataset into training, test (database), and query sets
+> and returns `PyTorch DataLoader` objects for each split for efficient batching and loading.
 
 ### Model building
 
@@ -104,13 +100,13 @@ class Machine(nn.Module):
 
 * `__init__` Method
   
-> Initializes the model structure and hyperparameters, setting different graph filtering weights depending on the task.
-> Defines the necessary layers, activation functions, and normalization components.
+> Initializes the model structure and hyperparameters, setting different graph filtering weights depending on the task
+> and defines the necessary layers, activation functions, and normalization components.
 
 * `adj_generator` Function
   
-> Generates a normalized adjacency matrix and diagonal matrix from the input similarity matrix.
-> Performs basic preprocessing for graph filtering.
+> Generates a normalized adjacency matrix and diagonal matrix from the input similarity matrix
+> then performs basic preprocessing for graph filtering.
 
 * `Fourier` Function
   
