@@ -102,32 +102,32 @@ class Machine(nn.Module):
     def forward(self, x, alpha)
 ```
 
-* `__init__`
+* `__init__` Method
   
 > Initializes the model structure and hyperparameters, setting different graph filtering weights depending on the task.
 > Defines the necessary layers, activation functions, and normalization components.
 
-* adj_generator
+* `adj_generator` Function
   
 > Generates a normalized adjacency matrix and diagonal matrix from the input similarity matrix.
 > Performs basic preprocessing for graph filtering.
 
-* fourier
+* `Fourier` Function
   
 > Computes the eigenvalues and eigenvectors of the graph Laplacian matrix.
 > Used in Fourier-based graph filtering.
 
-* bspline_basis
+* `Poly` Function
   
-> Generates B-spline basis functions for use in spline filtering.
+> Generates B-spline basis functions for use in spline filtering by bspline_basis function
 > Implements the recursive Cox-De Boor algorithm.
 
-* chebyshev_polynomials
+* `Cheby` Function
   
 > Computes Chebyshev polynomials to create bases for filtering.
 > Efficiently handles repeated linear operations on the graph.
 
-* lanczos_algorithm
+* `Lanc` Function
   
 > Uses the Lanczos algorithm to approximate a symmetric matrix with a tridiagonal matrix and orthogonal basis.
 > Provides the foundation for Lanczos-based filtering.
