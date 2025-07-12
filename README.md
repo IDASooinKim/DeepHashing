@@ -30,7 +30,7 @@ For faster experimentation, Please download the pre-embedded image dataset for t
 This code loads .npy files organized in folders into a custom PyTorch Dataset and splits them into train, test, and query sets.
 It sets up a data loading pipeline for training and evaluating image retrieval or hashing models.
 
-### 1. data_loader.py
+### Data loading
 ```python
 class NpyFolderDataset(Dataset):
     def __init__(self, ...)
@@ -41,15 +41,18 @@ class NpyFolderDataset(Dataset):
     ...
 ```
 
-🗂️ NpyFolderDataset Class
+* NpyFolderDataset Class
+  
 A custom PyTorch Dataset class for loading .npy files organized in a folder structure.
 It traverses class-specific directories, collecting file paths and corresponding labels.
 
-📏 __len__ Method
+* __len__ Method
+* 
 Returns the total number of samples in the dataset.
 This corresponds to the length of the self.data list.
 
-📥 __getitem__ Method
+* __getitem__ Method
+  
 Loads the .npy file at the specified index, converts it into a float tensor, and returns it with its label.
 The sample tensor is squeezed to remove extra dimensions.
 
