@@ -47,7 +47,7 @@ A custom PyTorch Dataset class for loading .npy files organized in a folder stru
 It traverses class-specific directories, collecting file paths and corresponding labels.
 
 * __len__ Method
-* 
+  
 Returns the total number of samples in the dataset.
 This corresponds to the length of the self.data list.
 
@@ -64,11 +64,12 @@ def get_data_loader():
     DataLoader()
 ```
 
-🔄 get_data_loader Function
+* get_data_loader Function
+  
 Randomly splits the dataset into training, test (database), and query sets.
 Returns PyTorch DataLoader objects for each split for efficient batching and loading.
 
-### 2. Model.py
+### Model building
 
 This source file contains the direct implementation of the HAGCN model.
 First, the sigmoid function used for binarizing the hash codes is defined as follows.
@@ -101,39 +102,47 @@ class Machine(nn.Module):
     def forward(self, x, alpha)
 ```
 
-🔧 __init__
+* __init__
+  
 Initializes the model structure and hyperparameters, setting different graph filtering weights depending on the task.
 Defines the necessary layers, activation functions, and normalization components.
 
-🔗 adj_generator
+* adj_generator
+  
 Generates a normalized adjacency matrix and diagonal matrix from the input similarity matrix.
 Performs basic preprocessing for graph filtering.
 
-🎼 fourier
+* fourier
+  
 Computes the eigenvalues and eigenvectors of the graph Laplacian matrix.
 Used in Fourier-based graph filtering.
 
-📐 bspline_basis
+* bspline_basis
+  
 Generates B-spline basis functions for use in spline filtering.
 Implements the recursive Cox-De Boor algorithm.
 
-🧮 chebyshev_polynomials
+* chebyshev_polynomials
+  
 Computes Chebyshev polynomials to create bases for filtering.
 Efficiently handles repeated linear operations on the graph.
 
-🧾 lanczos_algorithm
+* lanczos_algorithm
+  
 Uses the Lanczos algorithm to approximate a symmetric matrix with a tridiagonal matrix and orthogonal basis.
 Provides the foundation for Lanczos-based filtering.
 
-📊 calc_sim
+* calc_sim
+  
 Calculates pairwise similarity between feature vectors to produce a similarity matrix.
 Provides relationship information for subsequent graph operations.
 
-🚀 forward
+* forward
+  
 Defines the full forward pass of the model, performing task-specific graph filtering.
 Outputs the hash code, similarity matrix, and feature representation.
 
-### 3. engine.py
+### Model training
 
 The following is a description of training steps for our experiments
 
@@ -161,31 +170,38 @@ def run_experiment(k, num_epochs, task, exp_hash_len, train_loader, test_loader,
             mAP = CalcTopMap(...)
 ```
 
-1️⃣ Model and Experiment Setup
+* Model and Experiment Setup
+  
 The Machine model is initialized with different combinations of task and hash length.
 Defines the loss function (MSE) and optimizer (Adam).
 
-2️⃣ Training Loop
+* Training Loop
+  
 Iterates over training data, calculating reconstruction loss and similarity-based hash loss.
 Performs backpropagation to update model parameters.
 
-3️⃣ Hash Code Binarization
+* Hash Code Binarization
+  
 Converts sigmoid outputs into binary hash codes using a 0.5 threshold.
 The binary values are then scaled to {-1, 1} for evaluation.
 
-4️⃣ Test Set Hash Code Generation
+* Test Set Hash Code Generation
+  
 Generates hash codes for the gallery (database) using the test_loader.
 Appends each batch's hash codes and labels to lists, then concatenates them.
 
-5️⃣ Query Set Hash Code Generation
+* Query Set Hash Code Generation
+  
 Generates hash codes for the query set using the query_loader.
 Similarly binarizes and stores hash codes and labels as full arrays.
 
-6️⃣ Retrieval Performance Evaluation (mAP Calculation)
+* Retrieval Performance Evaluation (mAP Calculation)
+  
 Computes mAP using CalcTopMap() between query and gallery hash codes.
 Measures retrieval accuracy based on top-k Hamming distance.
 
-7️⃣ Result Logging and Output
+* Result Logging and Output
+  
 Tracks the best mAP and logs the results to a CSV file.
 Prints a summary of the experiment including task, k, and hash_len.
 
