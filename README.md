@@ -168,38 +168,38 @@ def run_experiment(k, num_epochs, task, exp_hash_len, train_loader, test_loader,
 
 * Model and Experiment Setup
   
-The Machine model is initialized with different combinations of task and hash length.
-Defines the loss function (MSE) and optimizer (Adam).
+> The Machine model is initialized with different combinations of task and hash length.
+> Defines the loss function (MSE) and optimizer (Adam).
 
 * Training Loop
   
-Iterates over training data, calculating reconstruction loss and similarity-based hash loss.
-Performs backpropagation to update model parameters.
+> Iterates over training data, calculating reconstruction loss and similarity-based hash loss.
+> Performs backpropagation to update model parameters.
 
 * Hash Code Binarization
   
-Converts sigmoid outputs into binary hash codes using a 0.5 threshold.
-The binary values are then scaled to {-1, 1} for evaluation.
+> Converts sigmoid outputs into binary hash codes using a 0.5 threshold.
+> The binary values are then scaled to {-1, 1} for evaluation.
 
 * Test Set Hash Code Generation
   
-Generates hash codes for the gallery (database) using the test_loader.
-Appends each batch's hash codes and labels to lists, then concatenates them.
+> Generates hash codes for the gallery (database) using the test_loader.
+> Appends each batch's hash codes and labels to lists, then concatenates them.
 
 * Query Set Hash Code Generation
   
-Generates hash codes for the query set using the query_loader.
-Similarly binarizes and stores hash codes and labels as full arrays.
+> Generates hash codes for the query set using the query_loader.
+> Similarly binarizes and stores hash codes and labels as full arrays.
 
 * Retrieval Performance Evaluation (mAP Calculation)
   
-Computes mAP using CalcTopMap() between query and gallery hash codes.
-Measures retrieval accuracy based on top-k Hamming distance.
+> Computes mAP using CalcTopMap() between query and gallery hash codes.
+> Measures retrieval accuracy based on top-k Hamming distance.
 
 * Result Logging and Output
   
-Tracks the best mAP and logs the results to a CSV file.
-Prints a summary of the experiment including task, k, and hash_len.
+> Tracks the best mAP and logs the results to a CSV file.
+> Prints a summary of the experiment including task, k, and hash_len.
 
 ## Usage Instructions & Requrements
 Please follow the instructions below to set up the experimental environment.
