@@ -64,7 +64,7 @@ def get_data_loader():
     DataLoader()
 ```
 
-* get_data_loader Function
+* `get_data_loader` Function
   
 > Randomly splits the dataset into training, test (database), and query sets.
 > Returns PyTorch DataLoader objects for each split for efficient batching and loading.
@@ -132,12 +132,12 @@ class Machine(nn.Module):
 > Uses the Lanczos algorithm to approximate a symmetric matrix with a tridiagonal matrix and orthogonal basis.
 > Provides the foundation for Lanczos-based filtering.
 
-* calc_sim
+* `calc_sim` Function
   
 > Calculates pairwise similarity between feature vectors to produce a similarity matrix.
 > Provides relationship information for subsequent graph operations.
 
-* forward
+* `forward` Function
   
 > Defines the full forward pass of the model, performing task-specific graph filtering.
 > Outputs the hash code, similarity matrix, and feature representation.
