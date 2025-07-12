@@ -48,13 +48,13 @@ class NpyFolderDataset(Dataset):
 
 * `__len__` Method
   
-Returns the total number of samples in the dataset.
-This corresponds to the length of the self.data list.
+> Returns the total number of samples in the dataset.
+> This corresponds to the length of the self.data list.
 
 * `__getitem__` Method
   
-Loads the .npy file at the specified index, converts it into a float tensor, and returns it with its label.
-The sample tensor is squeezed to remove extra dimensions.
+> Loads the .npy file at the specified index, converts it into a float tensor, and returns it with its label.
+> The sample tensor is squeezed to remove extra dimensions.
 
 ```python
 def get_data_loader():
@@ -66,13 +66,13 @@ def get_data_loader():
 
 * get_data_loader Function
   
-Randomly splits the dataset into training, test (database), and query sets.
-Returns PyTorch DataLoader objects for each split for efficient batching and loading.
+> Randomly splits the dataset into training, test (database), and query sets.
+> Returns PyTorch DataLoader objects for each split for efficient batching and loading.
 
 ### Model building
 
-This source file contains the direct implementation of the HAGCN model.
-First, the sigmoid function used for binarizing the hash codes is defined as follows.
+> This source file contains the direct implementation of the HAGCN model.
+> First, the sigmoid function used for binarizing the hash codes is defined as follows.
 
 ```python 
 class Asig(nn.Module):
@@ -104,43 +104,43 @@ class Machine(nn.Module):
 
 * `__init__`
   
-Initializes the model structure and hyperparameters, setting different graph filtering weights depending on the task.
-Defines the necessary layers, activation functions, and normalization components.
+> Initializes the model structure and hyperparameters, setting different graph filtering weights depending on the task.
+> Defines the necessary layers, activation functions, and normalization components.
 
 * adj_generator
   
-Generates a normalized adjacency matrix and diagonal matrix from the input similarity matrix.
-Performs basic preprocessing for graph filtering.
+> Generates a normalized adjacency matrix and diagonal matrix from the input similarity matrix.
+> Performs basic preprocessing for graph filtering.
 
 * fourier
   
-Computes the eigenvalues and eigenvectors of the graph Laplacian matrix.
-Used in Fourier-based graph filtering.
+> Computes the eigenvalues and eigenvectors of the graph Laplacian matrix.
+> Used in Fourier-based graph filtering.
 
 * bspline_basis
   
-Generates B-spline basis functions for use in spline filtering.
-Implements the recursive Cox-De Boor algorithm.
+> Generates B-spline basis functions for use in spline filtering.
+> Implements the recursive Cox-De Boor algorithm.
 
 * chebyshev_polynomials
   
-Computes Chebyshev polynomials to create bases for filtering.
-Efficiently handles repeated linear operations on the graph.
+> Computes Chebyshev polynomials to create bases for filtering.
+> Efficiently handles repeated linear operations on the graph.
 
 * lanczos_algorithm
   
-Uses the Lanczos algorithm to approximate a symmetric matrix with a tridiagonal matrix and orthogonal basis.
-Provides the foundation for Lanczos-based filtering.
+> Uses the Lanczos algorithm to approximate a symmetric matrix with a tridiagonal matrix and orthogonal basis.
+> Provides the foundation for Lanczos-based filtering.
 
 * calc_sim
   
-Calculates pairwise similarity between feature vectors to produce a similarity matrix.
-Provides relationship information for subsequent graph operations.
+> Calculates pairwise similarity between feature vectors to produce a similarity matrix.
+> Provides relationship information for subsequent graph operations.
 
 * forward
   
-Defines the full forward pass of the model, performing task-specific graph filtering.
-Outputs the hash code, similarity matrix, and feature representation.
+> Defines the full forward pass of the model, performing task-specific graph filtering.
+> Outputs the hash code, similarity matrix, and feature representation.
 
 ### Model training
 
