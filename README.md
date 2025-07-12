@@ -46,12 +46,12 @@ class NpyFolderDataset(Dataset):
 > A custom PyTorch Dataset class for loading .npy files organized in a folder structure.
 > It traverses class-specific directories, collecting file paths and corresponding labels.
 
-* __len__ Method
+* `__len__` Method
   
 Returns the total number of samples in the dataset.
 This corresponds to the length of the self.data list.
 
-* __getitem__ Method
+* `__getitem__` Method
   
 Loads the .npy file at the specified index, converts it into a float tensor, and returns it with its label.
 The sample tensor is squeezed to remove extra dimensions.
@@ -102,7 +102,7 @@ class Machine(nn.Module):
     def forward(self, x, alpha)
 ```
 
-* __init__
+* `__init__`
   
 Initializes the model structure and hyperparameters, setting different graph filtering weights depending on the task.
 Defines the necessary layers, activation functions, and normalization components.
