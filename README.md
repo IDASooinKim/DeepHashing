@@ -84,7 +84,7 @@ print("Extracted feature shape:", features.shape)  # (1, 768)
 * Result
 > You now have a 768-dimensional feature vector that represents the global content of your input image — ideal for tasks like image retrieval, clustering, or zero-shot learning.
 
-## Evaluation and Assessment metrics
+## Evaluation Methods
 
 * Model
 > The ViT-B/16 model pretrained on ImageNet-21k (21,841 classes) is used.
@@ -103,10 +103,9 @@ print("Extracted feature shape:", features.shape)  # (1, 768)
 * Training Configuration
 > Batch size is set to 128, and hash lengths used are 16, 28, 32, 64, and 128.
 
-##
+## Assessment Metrics
 
-* Evaluation Metrics
-> All models are evaluated using mAP@k based on hash length, loss variation, data distribution, and model parameters.
+> All models are evaluated using mAP@k based on hash length.
 > The code below shows a function that calculates the mAP (mean Average Precision).
 
 ```python
