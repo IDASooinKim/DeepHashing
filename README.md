@@ -25,6 +25,64 @@ The Tiny ImageNet dataset consists of 200 classes and 500 training images per cl
 The downloaded images must be embedded into 1-dimensional vectors of size 784 using the [ViT B/16](https://docs.pytorch.org/vision/main/models/generated/torchvision.models.vit_b_16.html) model.
 For faster experimentation, Please download the pre-embedded image dataset for the experiment:  you can download the pre-embedded [Stanford_Cars dataset](https://drive.google.com/file/d/1s39IUmYMnvvwMu1eotckh3HF6Mr1QvUt/view?usp=drive_link).
 
+## Data Preprocessing
+
+The following code is a preprocessing procedure that extracts an image as an embedding vector using the pretrained ViT-B/16 model.
+
+```python
+import torch
+from torchvision import models, transforms
+from PIL import Image
+
+model = models.vit_b_16(pretrained=True)
+model.eval()  # Set to evaluation mode
+
+def extract_features(image_tensor):
+    # image_tensor: (B, 3, 224, 224)
+    with torch.no_grad():
+        outputs = model._process_input(image_tensor)  # patch + pos embed
+        n = outputs.shape[1]
+        cls_token = model.cls_token.expand(image_tensor.shape[0], -1, -1)
+        x = torch.cat((cls_token, outputs), dim=1)
+        x = model.encoder(x)  # transformer encoder
+        return x[:, 0]  # take only the class token output
+
+preprocess = transforms.Compose([
+    transforms.Resize(256),
+    transforms.CenterCrop(224),
+    transforms.ToTensor(),
+    transforms.Normalize(
+        mean=[0.485, 0.456, 0.406],  # ImageNet mean
+        std=[0.229, 0.224, 0.225]    # ImageNet std
+    )
+])
+
+image_path = "your_image.jpg"  # Replace with your actual image path
+image = Image.open(image_path).convert("RGB")
+image_tensor = preprocess(image).unsqueeze(0)  # Add batch dimension
+
+features = extract_features(image_tensor)
+print("Extracted feature shape:", features.shape)  # (1, 768)
+```
+
+* 1. Load and Set Up the Model
+We begin by loading the pretrained vit_b_16 model from torchvision.models. The model is set to evaluation mode to ensure no gradients are computed.
+
+* 2. Modify the Model to Extract Intermediate Features
+ViT represents the entire image using the output of a special class token from the last transformer layer. We manually pass the input through the embedding and encoder stages to directly access this representation.
+
+* 3. Preprocess the Image
+ViT models expect input images of size 224×224 and normalized using ImageNet statistics. We use standard torchvision.transforms to prepare the image.
+
+* 4. Load and Preprocess the Image
+The image is opened with PIL, converted to RGB, and passed through the preprocessing pipeline. A batch dimension is added for model compatibility.
+
+* 5. Extract Feature Embedding
+Finally, we run the image tensor through the custom extract_features() function to obtain a 768-dimensional embedding vector.
+
+*Result
+You now have a 768-dimensional feature vector that represents the global content of your input image — ideal for tasks like image retrieval, clustering, or zero-shot learning.
+
 ## Code Information
 
 This code loads .npy files organized in folders into a custom PyTorch Dataset and splits them into train, test, and query sets.
