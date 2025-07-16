@@ -330,8 +330,6 @@ For detailed arguments, please refer to the arguments.py file.
 
 ## Conclusions and Limitations
 
-# Summary: HAGCN-Based Deep Hashing Model Study
-
 ## Problem
 Traditional CNN-based deep hashing methods rely on fixed graph structures and grid-based convolutions, making it difficult to capture complex and unstructured relationships in high-dimensional data.
 
@@ -346,7 +344,7 @@ The study introduces **HAGCN**, a model that dynamically constructs subgraphs an
 ## Applicability
 The improved model shows strong potential for use in real-world applications requiring **fast and accurate similarity search**.
 
-## ⚠Limitations
+## Limitations
 - **High computational cost** of GCNs, especially on large-scale datasets  
 - Need for **further validation** across diverse data types
 
