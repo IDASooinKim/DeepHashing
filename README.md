@@ -84,13 +84,10 @@ print("Extracted feature shape:", features.shape)  # (1, 768)
 * Result
 > You now have a 768-dimensional feature vector that represents the global content of your input image — ideal for tasks like image retrieval, clustering, or zero-shot learning.
 
-# Evaluation and Assessment metrics
+## Evaluation and Assessment metrics
 
 * Model
 > The ViT-B/16 model pretrained on ImageNet-21k (21,841 classes) is used.
-
-* Evaluation Metrics
-> All models are evaluated using mAP@k based on hash length, loss variation, data distribution, and model parameters.
 
 * Validation Scheme
 > A 5-fold cross-validation is applied on both training and testing datasets to ensure fair comparison.
@@ -106,6 +103,49 @@ print("Extracted feature shape:", features.shape)  # (1, 768)
 * Training Configuration
 > Batch size is set to 128, and hash lengths used are 16, 28, 32, 64, and 128.
 
+##
+
+* Evaluation Metrics
+> All models are evaluated using mAP@k based on hash length, loss variation, data distribution, and model parameters.
+> The code below shows a function that calculates the mAP (mean Average Precision).
+
+```python
+def CalcTopMap(rB, qB, retrievalL, queryL, topk):
+    num_query = queryL.shape[0]
+    topkmap = 0
+    valid_queries = 0
+
+    for iter in range(num_query):
+        # ground truth: 공통 라벨이 있는 retrieval 이미지
+        gnd = (np.dot(queryL[iter], retrievalL.transpose()) > 0).astype(np.float32)
+
+        # 해밍 거리 계산 및 정렬
+        hamm = CalcHammingDist(qB[iter], rB)
+        ind = np.argsort(hamm)
+        gnd = gnd[ind]
+
+        # 상위 top-k 정답만 사용
+        tgnd = gnd[:topk]
+        if np.sum(tgnd) == 0:
+            continue
+
+        valid_queries += 1
+        pos_idx = np.where(tgnd == 1)[0]
+
+        # 정확한 AP 계산
+        prec = [(i + 1) / (pos_idx[i] + 1) for i in range(len(pos_idx))]
+        ap = np.mean(prec)
+        topkmap += ap
+
+    if valid_queries == 0:
+        return 0.0
+    return topkmap / valid_queries
+
+def CalcHammingDist(B1, B2):
+    q = B2.shape[1]
+    distH = 0.5 * (q - np.dot(B1, B2.transpose()))
+    return distH```
+    
 # Code Information
 
 This code loads .npy files organized in folders into a custom PyTorch Dataset and splits them into train, test, and query sets.
