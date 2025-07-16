@@ -143,7 +143,8 @@ def CalcTopMap(rB, qB, retrievalL, queryL, topk):
 def CalcHammingDist(B1, B2):
     q = B2.shape[1]
     distH = 0.5 * (q - np.dot(B1, B2.transpose()))
-    return distH```
+    return distH
+```
     
 # Code Information
 
