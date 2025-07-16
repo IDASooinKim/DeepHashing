@@ -327,3 +327,29 @@ python main.py --num_epochs 200 --batch_size 64 --num_cls 10
 ```
 
 For detailed arguments, please refer to the arguments.py file.
+
+## Conclusions and Limitations
+
+# Summary: HAGCN-Based Deep Hashing Model Study
+
+## Problem
+Traditional CNN-based deep hashing methods rely on fixed graph structures and grid-based convolutions, making it difficult to capture complex and unstructured relationships in high-dimensional data.
+
+## Proposed Solution
+The study introduces **HAGCN**, a model that dynamically constructs subgraphs and utilizes **GCN layers** to enhance semantic preservation and improve similarity search accuracy.
+
+## Experimental Results
+- Achieved superior **mAP performance** compared to existing CNN and GCN-based hashing methods across multiple datasets.  
+- GCNs, despite their simplicity, provided competitive results with lower computational complexity.  
+- HAGCN effectively reduces quantization error between continuous and binary embeddings and performs well even in **unsupervised (label-scarce) environments**.
+
+## Applicability
+The improved model shows strong potential for use in real-world applications requiring **fast and accurate similarity search**.
+
+## ⚠Limitations
+- **High computational cost** of GCNs, especially on large-scale datasets  
+- Need for **further validation** across diverse data types
+
+## Future Work
+- Explore optimization techniques to improve **computational efficiency** of GCN-based hashing  
+- Conduct broader **performance validation on real-world datasets**
