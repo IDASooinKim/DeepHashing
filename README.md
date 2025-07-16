@@ -83,6 +83,28 @@ print("Extracted feature shape:", features.shape)  # (1, 768)
 Result
 > You now have a 768-dimensional feature vector that represents the global content of your input image — ideal for tasks like image retrieval, clustering, or zero-shot learning.
 
+## Evaluation and Assessment metrics
+
+* Model
+> The ViT-B/16 model pretrained on ImageNet-21k (21,841 classes) is used.
+
+* Evaluation Metrics
+> All models are evaluated using mAP@k based on hash length, loss variation, data distribution, and model parameters.
+
+* Validation Scheme
+> A 5-fold cross-validation is applied on both training and testing datasets to ensure fair comparison.
+> The value of k is set equal to the number of classes for all datasets.
+
+* Experimental Setup
+> Experiments are conducted using PyTorch on a system with four NVIDIA RTX A5000 GPUs and 128GB RAM.
+
+* Optimization
+> The Adam optimizer is used with a momentum of 0.9 and an initial learning rate of 1e-4.
+> The trade-off parameter λ is set to 1e-4 based on preliminary experiments analyzing the L1 and L2 loss ratio.
+
+* Training Configuration
+> Batch size is set to 128, and hash lengths used are 16, 28, 32, 64, and 128.
+
 ## Code Information
 
 This code loads .npy files organized in folders into a custom PyTorch Dataset and splits them into train, test, and query sets.
