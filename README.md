@@ -65,23 +65,23 @@ features = extract_features(image_tensor)
 print("Extracted feature shape:", features.shape)  # (1, 768)
 ```
 
-* 1. Load and Set Up the Model
-We begin by loading the pretrained vit_b_16 model from torchvision.models. The model is set to evaluation mode to ensure no gradients are computed.
+1. Load and Set Up the Model
+> We begin by loading the pretrained vit_b_16 model from torchvision.models. The model is set to evaluation mode to ensure no gradients are computed.
 
-* 2. Modify the Model to Extract Intermediate Features
-ViT represents the entire image using the output of a special class token from the last transformer layer. We manually pass the input through the embedding and encoder stages to directly access this representation.
+2. Modify the Model to Extract Intermediate Features
+> ViT represents the entire image using the output of a special class token from the last transformer layer. We manually pass the input through the embedding and encoder stages to directly access this representation.
 
-* 3. Preprocess the Image
-ViT models expect input images of size 224×224 and normalized using ImageNet statistics. We use standard torchvision.transforms to prepare the image.
+3. Preprocess the Image
+> ViT models expect input images of size 224×224 and normalized using ImageNet statistics. We use standard torchvision.transforms to prepare the image.
 
-* 4. Load and Preprocess the Image
-The image is opened with PIL, converted to RGB, and passed through the preprocessing pipeline. A batch dimension is added for model compatibility.
+4. Load and Preprocess the Image
+> The image is opened with PIL, converted to RGB, and passed through the preprocessing pipeline. A batch dimension is added for model compatibility.
 
-* 5. Extract Feature Embedding
-Finally, we run the image tensor through the custom extract_features() function to obtain a 768-dimensional embedding vector.
+5. Extract Feature Embedding
+> Finally, we run the image tensor through the custom extract_features() function to obtain a 768-dimensional embedding vector.
 
-*Result
-You now have a 768-dimensional feature vector that represents the global content of your input image — ideal for tasks like image retrieval, clustering, or zero-shot learning.
+Result
+> You now have a 768-dimensional feature vector that represents the global content of your input image — ideal for tasks like image retrieval, clustering, or zero-shot learning.
 
 ## Code Information
 
