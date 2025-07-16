@@ -24,129 +24,8 @@ The Tiny ImageNet dataset consists of 200 classes and 500 training images per cl
 
 The downloaded images must be embedded into 1-dimensional vectors of size 784 using the [ViT B/16](https://docs.pytorch.org/vision/main/models/generated/torchvision.models.vit_b_16.html) model.
 For faster experimentation, Please download the pre-embedded image dataset for the experiment:  you can download the pre-embedded [Stanford_Cars dataset](https://drive.google.com/file/d/1s39IUmYMnvvwMu1eotckh3HF6Mr1QvUt/view?usp=drive_link).
-
-# 3. Material & Methods
-## Data Preprocessing
-
-> The following code is a preprocessing procedure that extracts an image as an embedding vector using the pretrained ViT-B/16 model.
-
-```python
-import torch
-from torchvision import models, transforms
-from PIL import Image
-
-model = models.vit_b_16(pretrained=True)
-model.eval()  # Set to evaluation mode
-
-def extract_features(image_tensor):
-    # image_tensor: (B, 3, 224, 224)
-    with torch.no_grad():
-        outputs = model._process_input(image_tensor)  # patch + pos embed
-        n = outputs.shape[1]
-        cls_token = model.cls_token.expand(image_tensor.shape[0], -1, -1)
-        x = torch.cat((cls_token, outputs), dim=1)
-        x = model.encoder(x)  # transformer encoder
-        return x[:, 0]  # take only the class token output
-
-preprocess = transforms.Compose([
-    transforms.Resize(256),
-    transforms.CenterCrop(224),
-    transforms.ToTensor(),
-    transforms.Normalize(
-        mean=[0.485, 0.456, 0.406],  # ImageNet mean
-        std=[0.229, 0.224, 0.225]    # ImageNet std
-    )
-])
-
-image_path = "your_image.jpg"  # Replace with your actual image path
-image = Image.open(image_path).convert("RGB")
-image_tensor = preprocess(image).unsqueeze(0)  # Add batch dimension
-
-features = extract_features(image_tensor)
-print("Extracted feature shape:", features.shape)  # (1, 768)
-```
-
-* Load and Set Up the Model
-> We begin by loading the pretrained vit_b_16 model from torchvision.models. The model is set to evaluation mode to ensure no gradients are computed.
-
-* Modify the Model to Extract Intermediate Features
-> ViT represents the entire image using the output of a special class token from the last transformer layer. We manually pass the input through the embedding and encoder stages to directly access this representation.
-
-* Preprocess the Image
-> ViT models expect input images of size 224×224 and normalized using ImageNet statistics. We use standard torchvision.transforms to prepare the image.
-
-* Load and Preprocess the Image
-> The image is opened with PIL, converted to RGB, and passed through the preprocessing pipeline. A batch dimension is added for model compatibility.
-
-* Extract Feature Embedding
-> Finally, we run the image tensor through the custom extract_features() function to obtain a 768-dimensional embedding vector.
-
-* Result
-> You now have a 768-dimensional feature vector that represents the global content of your input image — ideal for tasks like image retrieval, clustering, or zero-shot learning.
-
-## Evaluation Methods
-
-* Model
-> The ViT-B/16 model pretrained on ImageNet-21k (21,841 classes) is used.
-
-* Validation Scheme
-> A 5-fold cross-validation is applied on both training and testing datasets to ensure fair comparison.
-> The value of k is set equal to the number of classes for all datasets.
-
-* Experimental Setup
-> Experiments are conducted using PyTorch on a system with four NVIDIA RTX A5000 GPUs and 128GB RAM.
-
-* Optimization
-> The Adam optimizer is used with a momentum of 0.9 and an initial learning rate of 1e-4.
-> The trade-off parameter λ is set to 1e-4 based on preliminary experiments analyzing the L1 and L2 loss ratio.
-
-* Training Configuration
-> Batch size is set to 128, and hash lengths used are 16, 28, 32, 64, and 128.
-
-## Assessment Metrics
-
-> All models are evaluated using mAP@k based on hash length.
-> The code below shows a function that calculates the mAP (mean Average Precision).
-
-```python
-def CalcTopMap(rB, qB, retrievalL, queryL, topk):
-    num_query = queryL.shape[0]
-    topkmap = 0
-    valid_queries = 0
-
-    for iter in range(num_query):
-        # ground truth: 공통 라벨이 있는 retrieval 이미지
-        gnd = (np.dot(queryL[iter], retrievalL.transpose()) > 0).astype(np.float32)
-
-        # 해밍 거리 계산 및 정렬
-        hamm = CalcHammingDist(qB[iter], rB)
-        ind = np.argsort(hamm)
-        gnd = gnd[ind]
-
-        # 상위 top-k 정답만 사용
-        tgnd = gnd[:topk]
-        if np.sum(tgnd) == 0:
-            continue
-
-        valid_queries += 1
-        pos_idx = np.where(tgnd == 1)[0]
-
-        # 정확한 AP 계산
-        prec = [(i + 1) / (pos_idx[i] + 1) for i in range(len(pos_idx))]
-        ap = np.mean(prec)
-        topkmap += ap
-
-    if valid_queries == 0:
-        return 0.0
-    return topkmap / valid_queries
-
-def CalcHammingDist(B1, B2):
-    q = B2.shape[1]
-    distH = 0.5 * (q - np.dot(B1, B2.transpose()))
-    return distH
-```
     
-# Code Information
+# 3. Code Information
 
 This code loads .npy files organized in folders into a custom PyTorch Dataset and splits them into train, test, and query sets.
 It sets up a data loading pipeline for training and evaluating image retrieval or hashing models.
@@ -369,7 +248,128 @@ python main.py --num_epochs 200 --batch_size 64 --num_cls 10
 
 For detailed arguments, please refer to the arguments.py file.
 
-# 5. Conclusions and Limitations
+# 5. Material & Methods
+## Data Preprocessing
+
+> The following code is a preprocessing procedure that extracts an image as an embedding vector using the pretrained ViT-B/16 model.
+
+```python
+import torch
+from torchvision import models, transforms
+from PIL import Image
+
+model = models.vit_b_16(pretrained=True)
+model.eval()  # Set to evaluation mode
+
+def extract_features(image_tensor):
+    # image_tensor: (B, 3, 224, 224)
+    with torch.no_grad():
+        outputs = model._process_input(image_tensor)  # patch + pos embed
+        n = outputs.shape[1]
+        cls_token = model.cls_token.expand(image_tensor.shape[0], -1, -1)
+        x = torch.cat((cls_token, outputs), dim=1)
+        x = model.encoder(x)  # transformer encoder
+        return x[:, 0]  # take only the class token output
+
+preprocess = transforms.Compose([
+    transforms.Resize(256),
+    transforms.CenterCrop(224),
+    transforms.ToTensor(),
+    transforms.Normalize(
+        mean=[0.485, 0.456, 0.406],  # ImageNet mean
+        std=[0.229, 0.224, 0.225]    # ImageNet std
+    )
+])
+
+image_path = "your_image.jpg"  # Replace with your actual image path
+image = Image.open(image_path).convert("RGB")
+image_tensor = preprocess(image).unsqueeze(0)  # Add batch dimension
+
+features = extract_features(image_tensor)
+print("Extracted feature shape:", features.shape)  # (1, 768)
+```
+
+* Load and Set Up the Model
+> We begin by loading the pretrained vit_b_16 model from torchvision.models. The model is set to evaluation mode to ensure no gradients are computed.
+
+* Modify the Model to Extract Intermediate Features
+> ViT represents the entire image using the output of a special class token from the last transformer layer. We manually pass the input through the embedding and encoder stages to directly access this representation.
+
+* Preprocess the Image
+> ViT models expect input images of size 224×224 and normalized using ImageNet statistics. We use standard torchvision.transforms to prepare the image.
+
+* Load and Preprocess the Image
+> The image is opened with PIL, converted to RGB, and passed through the preprocessing pipeline. A batch dimension is added for model compatibility.
+
+* Extract Feature Embedding
+> Finally, we run the image tensor through the custom extract_features() function to obtain a 768-dimensional embedding vector.
+
+* Result
+> You now have a 768-dimensional feature vector that represents the global content of your input image — ideal for tasks like image retrieval, clustering, or zero-shot learning.
+
+## Evaluation Methods
+
+* Model
+> The ViT-B/16 model pretrained on ImageNet-21k (21,841 classes) is used.
+
+* Validation Scheme
+> A 5-fold cross-validation is applied on both training and testing datasets to ensure fair comparison.
+> The value of k is set equal to the number of classes for all datasets.
+
+* Experimental Setup
+> Experiments are conducted using PyTorch on a system with four NVIDIA RTX A5000 GPUs and 128GB RAM.
+
+* Optimization
+> The Adam optimizer is used with a momentum of 0.9 and an initial learning rate of 1e-4.
+> The trade-off parameter λ is set to 1e-4 based on preliminary experiments analyzing the L1 and L2 loss ratio.
+
+* Training Configuration
+> Batch size is set to 128, and hash lengths used are 16, 28, 32, 64, and 128.
+
+## Assessment Metrics
+
+> All models are evaluated using mAP@k based on hash length.
+> The code below shows a function that calculates the mAP (mean Average Precision).
+
+```python
+def CalcTopMap(rB, qB, retrievalL, queryL, topk):
+    num_query = queryL.shape[0]
+    topkmap = 0
+    valid_queries = 0
+
+    for iter in range(num_query):
+        # ground truth: 공통 라벨이 있는 retrieval 이미지
+        gnd = (np.dot(queryL[iter], retrievalL.transpose()) > 0).astype(np.float32)
+
+        # 해밍 거리 계산 및 정렬
+        hamm = CalcHammingDist(qB[iter], rB)
+        ind = np.argsort(hamm)
+        gnd = gnd[ind]
+
+        # 상위 top-k 정답만 사용
+        tgnd = gnd[:topk]
+        if np.sum(tgnd) == 0:
+            continue
+
+        valid_queries += 1
+        pos_idx = np.where(tgnd == 1)[0]
+
+        # 정확한 AP 계산
+        prec = [(i + 1) / (pos_idx[i] + 1) for i in range(len(pos_idx))]
+        ap = np.mean(prec)
+        topkmap += ap
+
+    if valid_queries == 0:
+        return 0.0
+    return topkmap / valid_queries
+
+def CalcHammingDist(B1, B2):
+    q = B2.shape[1]
+    distH = 0.5 * (q - np.dot(B1, B2.transpose()))
+    return distH
+```
+
+# 6. Conclusions and Limitations
 
 ## Problem
 Traditional CNN-based deep hashing methods rely on fixed graph structures and grid-based convolutions, making it difficult to capture complex and unstructured relationships in high-dimensional data.
