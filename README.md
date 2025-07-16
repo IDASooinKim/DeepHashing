@@ -25,9 +25,10 @@ The Tiny ImageNet dataset consists of 200 classes and 500 training images per cl
 The downloaded images must be embedded into 1-dimensional vectors of size 784 using the [ViT B/16](https://docs.pytorch.org/vision/main/models/generated/torchvision.models.vit_b_16.html) model.
 For faster experimentation, Please download the pre-embedded image dataset for the experiment:  you can download the pre-embedded [Stanford_Cars dataset](https://drive.google.com/file/d/1s39IUmYMnvvwMu1eotckh3HF6Mr1QvUt/view?usp=drive_link).
 
-# Data Preprocessing
+# Material & Methods
+## Data Preprocessing
 
-The following code is a preprocessing procedure that extracts an image as an embedding vector using the pretrained ViT-B/16 model.
+> The following code is a preprocessing procedure that extracts an image as an embedding vector using the pretrained ViT-B/16 model.
 
 ```python
 import torch
@@ -65,10 +66,10 @@ features = extract_features(image_tensor)
 print("Extracted feature shape:", features.shape)  # (1, 768)
 ```
 
-1. Load and Set Up the Model
+> 1. Load and Set Up the Model
 > We begin by loading the pretrained vit_b_16 model from torchvision.models. The model is set to evaluation mode to ensure no gradients are computed.
 
-2. Modify the Model to Extract Intermediate Features
+> 2. Modify the Model to Extract Intermediate Features
 > ViT represents the entire image using the output of a special class token from the last transformer layer. We manually pass the input through the embedding and encoder stages to directly access this representation.
 
 3. Preprocess the Image
