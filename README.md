@@ -347,7 +347,3 @@ The improved model shows strong potential for use in real-world applications req
 ## Limitations
 - **High computational cost** of GCNs, especially on large-scale datasets  
 - Need for **further validation** across diverse data types
-
-## Future Work
-- Explore optimization techniques to improve **computational efficiency** of GCN-based hashing  
-- Conduct broader **performance validation on real-world datasets**
