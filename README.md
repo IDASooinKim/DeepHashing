@@ -382,10 +382,11 @@ repository
 
 ![poster](./images/topkk.png)
 
-- Effect of the cosine-similarity threshold τ on mAP performance.
-- mAP increases as τ rises from 0.1 to roughly 0.5, then declines as τ approaches 1.0. The op-
-timum lies near τ ≈ 0.5, where GCN attains the highest accuracy (≈ 0.93), closely followed by
-Chebyshev; Lanczos and Polynomial trail, and Fourier is consistently the weakest.
+- Datasets are structured into classes. In this context, if k represents the number of classes, it can
+encompass all within-class distributions.
+- Determining an appropriate value for k is difficult, so it is chosen based on the number of
+classes in the dataset through pre-sample experimental analysis. Further clarification is available in the
+GitHub repository.
 
 | Model     | 16 bits | 28 bits | 32 bits | 64 bits | 128 bits |
 |-----------|---------|---------|---------|---------|----------|
@@ -399,7 +400,11 @@ Chebyshev; Lanczos and Polynomial trail, and Fourier is consistently the weakest
 | VTS       | 0.930   | 0.942   | 0.947   | 0.952   | 0.955    |
 | TransHash | 0.934   | 0.945   | 0.949   | 0.954   | 0.957    |
 
-
+- HAGCN is trained using a self-supervised method, and the comparison models are comprised of similar
+self-supervised or unsupervised learning models. Therefore, supervised learning-based deep hashing
+models are excluded from the comparison.
+- The comparison of VTS and TransH on the STL-10 is as follows. Further clarification is available in
+the GitHub repository.
 
 # 6. Conclusions and Limitations
 
