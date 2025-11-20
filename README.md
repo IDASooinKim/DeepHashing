@@ -369,7 +369,7 @@ def CalcHammingDist(B1, B2):
     return distH
 ```
 <div align="center">
-<img src="./images/topk.png" width="500px">
+<img src="./images/fig-k.png" width="500px">
 </div>
 
 - When transitive embedding utilizes global context, multilevel/hierarchical graphs offer limited hashing
@@ -383,7 +383,7 @@ repository
 
 
 <div align="center">
-<img src="./images/topkk.png" width="500px">
+<img src="./images/fig-topk.png" width="500px">
 </div>
 
 - Datasets are structured into classes. In this context, if k represents the number of classes, it can
