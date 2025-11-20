@@ -368,7 +368,9 @@ def CalcHammingDist(B1, B2):
     distH = 0.5 * (q - np.dot(B1, B2.transpose()))
     return distH
 ```
-<img src="./images/topk.png" width="300px">
+<div align="center">
+<img src="./images/topk.png" width="500px">
+</div>
 
 - When transitive embedding utilizes global context, multilevel/hierarchical graphs offer limited hashing
 performance gains relative to the additional cost. Furthermore, simple first-order graphs can offer
@@ -380,8 +382,9 @@ data features from low frequencies than GCN filters. Further clarification is av
 repository
 
 
-
-<img src="./images/topkk.png" width="300px">
+<div align="center">
+<img src="./images/topkk.png" width="500px">
+</div>
 
 - Datasets are structured into classes. In this context, if k represents the number of classes, it can
 encompass all within-class distributions.
