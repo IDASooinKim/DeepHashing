@@ -380,7 +380,7 @@ equally well or slightly better than GCN. In contrast, Fourier filters are less 
 data features from low frequencies than GCN filters. Further clarification is available in the GitHub
 repository
 
-![poster](./images/tau.png)
+![poster](./images/topkk.png)
 
 - Effect of the cosine-similarity threshold τ on mAP performance.
 - mAP increases as τ rises from 0.1 to roughly 0.5, then declines as τ approaches 1.0. The op-
