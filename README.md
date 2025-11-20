@@ -376,7 +376,7 @@ def CalcHammingDist(B1, B2):
 performance gains relative to the additional cost. Furthermore, simple first-order graphs can offer
 advantages in consistency and reproducibility, as they reduce reliance on structures unused during the
 inference phase.
-- Even with multi-hops of k = 4, Chebyshev, Lanczos, and Polynomial perform
+- Even with multi-hops of K = 4, Chebyshev, Lanczos, and Polynomial perform
 equally well or slightly better than GCN. In contrast, Fourier filters are less effective at representing
 data features from low frequencies than GCN filters. Further clarification is available in the GitHub
 repository
