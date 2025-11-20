@@ -368,6 +368,38 @@ def CalcHammingDist(B1, B2):
     distH = 0.5 * (q - np.dot(B1, B2.transpose()))
     return distH
 ```
+![poster](./images/topk.png)
+
+- When transitive embedding utilizes global context, multilevel/hierarchical graphs offer limited hashing
+performance gains relative to the additional cost. Furthermore, simple first-order graphs can offer
+advantages in consistency and reproducibility, as they reduce reliance on structures unused during the
+inference phase.
+
+- As shown in Table 5, even with multi-hops of k = 4, Chebyshev, Lanczos, and Polynomial perform
+equally well or slightly better than GCN. In contrast, Fourier filters are less effective at representing
+data features from low frequencies than GCN filters. Further clarification is available in the GitHub
+repository
+
+![poster](./images/tau.png)
+
+- Effect of the cosine-similarity threshold τ on mAP performance.
+- mAP increases as τ rises from 0.1 to roughly 0.5, then declines as τ approaches 1.0. The op-
+timum lies near τ ≈ 0.5, where GCN attains the highest accuracy (≈ 0.93), closely followed by
+Chebyshev; Lanczos and Polynomial trail, and Fourier is consistently the weakest.
+
+| Model     | 16 bits | 28 bits | 32 bits | 64 bits | 128 bits |
+|-----------|---------|---------|---------|---------|----------|
+| DCGH      | 0.855   | 0.864   | 0.870   | 0.880   | 0.881    |
+| BGDH      | 0.863   | 0.872   | 0.873   | 0.879   | 0.880    |
+| TBH       | 0.851   | 0.870   | 0.873   | 0.878   | 0.882    |
+| GCNH      | 0.849   | 0.866   | 0.868   | 0.875   | 0.885    |
+| DSH       | 0.646   | 0.802   | 0.874   | 0.883   | 0.880    |
+| MeCoQ     | 0.857   | 0.868   | 0.877   | 0.880   | 0.881    |
+| HAGCN     | 0.923   | 0.925   | 0.925   | 0.926   | 0.929    |
+| VTS       | 0.930   | 0.942   | 0.947   | 0.952   | 0.955    |
+| TransHash | 0.934   | 0.945   | 0.949   | 0.954   | 0.957    |
+
+
 
 # 6. Conclusions and Limitations
 
