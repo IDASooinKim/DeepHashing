@@ -391,6 +391,7 @@ GitHub repository.
 
 
 <div align="center">
+
 | Model     | 16 bits | 28 bits | 32 bits | 64 bits | 128 bits |
 |-----------|---------|---------|---------|---------|----------|
 | DCGH      | 0.855   | 0.864   | 0.870   | 0.880   | 0.881    |
@@ -403,12 +404,14 @@ GitHub repository.
 | VTS       | 0.930   | 0.942   | 0.947   | 0.952   | 0.955    |
 | TransHash | 0.934   | 0.945   | 0.949   | 0.954   | 0.957    |
 
+</div>
+
 - HAGCN is trained using a self-supervised method, and the comparison models are comprised of similar
 self-supervised or unsupervised learning models. Therefore, supervised learning-based deep hashing
 models are excluded from the comparison.
 - The comparison of VTS and TransH on the STL-10 is as follows. Further clarification is available in
 the GitHub repository.
-</div>
+
     
 # 6. Conclusions and Limitations
 
