@@ -390,7 +390,7 @@ classes in the dataset through pre-sample experimental analysis. Further clarifi
 GitHub repository.
 
 
-
+<div align="center">
 | Model     | 16 bits | 28 bits | 32 bits | 64 bits | 128 bits |
 |-----------|---------|---------|---------|---------|----------|
 | DCGH      | 0.855   | 0.864   | 0.870   | 0.880   | 0.881    |
@@ -408,7 +408,8 @@ self-supervised or unsupervised learning models. Therefore, supervised learning-
 models are excluded from the comparison.
 - The comparison of VTS and TransH on the STL-10 is as follows. Further clarification is available in
 the GitHub repository.
-
+</div>
+    
 # 6. Conclusions and Limitations
 
 ## Problem
