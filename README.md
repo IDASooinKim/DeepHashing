@@ -2,7 +2,7 @@
 
 # Enhancing deephashing with graph filters and autoencoder-based embeddings
 
-![poster](./images/arch.png)
+![poster](./images/model_arch.png)
 <div align="left">
 
 # 1. Description
